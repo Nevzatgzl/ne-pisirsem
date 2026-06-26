@@ -1,0 +1,155 @@
+/* --- GENEL AYARLAR --- */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- NAVBAR (GURME KIRMIZISI) --- */
+.navbar {
+    background-color: #C0392B !important; /* o özel kırmızı */
+    padding: 10px 0;
+}
+
+.navbar .navbar-brand, 
+.navbar .nav-link {
+    color: white !important;
+}
+
+.navbar .nav-link:hover {
+    color: gray !important; /* Üzerine gelince gri  */
+}
+
+
+
+
+
+
+
+.search-box-container {
+    background-color: #FDF5E6 !important;
+    color: black !important;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(192, 57, 43, 0.3);
+}
+
+.search-box-container h2 {
+    font-weight: 800;
+}
+
+
+.recipe-card {
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.recipe-card img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.btn-outline-danger {
+    color: #C0392B;
+    border-color: #C0392B;
+}
+
+.btn-outline-danger:hover {
+    background-color: #C0392B;
+    color: white;
+}
+/* Aktif olan linkin altına ince bir çizgi ekleyelim */
+.nav-link.active {
+    color:black ; 
+    border-bottom: 2px solid;
+    font-weight: bold;
+}
+#authTab .nav-link.active {
+    border-bottom: 3px solid #C0392B !important;
+    background-color: transparent;
+}
+
+#authTab .nav-link {
+    transition: all 0.3s ease;
+}
+
+.modal-content {
+    animation: zoomIn 0.3s;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- HERO SECTION (VİTRİN) DÜZELTİLMİŞ --- */
+
+.hero-link {
+    display: block; 
+    text-decoration: none !important;
+    border-radius: 15px;
+    overflow: hidden; /* Kart büyürken dışarı taşmasın diye */
+}
+
+.hero-card {
+    background-size: cover;
+    background-position: center;
+    border: none !important;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    /* Transition sadece transforme odaklı ve 0.3s olursa daha seri hissettirir */
+    transition: transform 0.3s ease, filter 0.3s ease; 
+}
+
+/* BURASI KRİTİK: Hem linke hem karta hover olunca büyü diyoruz */
+.hero-link:hover .hero-card,
+.hero-card:hover {
+    transform: scale(1.03) !important; /* Senin orijinal büyüme oranına geri döndük */
+    filter: brightness(1.1); /* Hafif parlasın ki tıklandığı anlaşılsın */
+}
+
+.big-card {
+    height: 450px;
+}
+
+.small-card {
+    height: 217px;
+}
+
+.hero-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    height: 50%;
+    display: flex;
+    align-items: flex-end;
+    transition: background 0.3s ease;
+}
+/* Admin butonuna özel parıltı efekti */
+.btn-outline-warning.shadow-sm {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.4) !important;
+    border-color: #ffc107 !important;
+}
+/* Navbar dropdown içindeki linklerin mavi olmasını engelle */
+#auth-alan .dropdown-item {
+    color: #212529 !important; /* Standart koyu gri/siyah */
+}
+
+/* Üzerine gelince (hover) mavi olmasın, hafif gri olsun */
+#auth-alan .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #000 !important;
+}
+.recipe-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}

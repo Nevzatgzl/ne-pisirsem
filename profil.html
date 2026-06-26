@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim - Ne Pişirsem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <img src="logo.png" alt="Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm">
+                <span>Ne Pişirsem</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Anasayfa</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="katDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategoriler
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="katDropdown">
+                            <li><a class="dropdown-item" href="index.html?q=Ana Yemek">🍽️ Ana Yemekler</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Et Yemekleri">🥩 Et Yemekleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Çorba">🍲 Çorbalar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Tatlı">🍰 Tatlılar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Hamur İşleri">🥐 Hamur İşleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Atıştırmalık">🥪 Atıştırmalık</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="index.html">Tüm Tarifler</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="yazarlar.html">Yazarlar</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hakkimizda.html">Hakkımızda</a></li>
+                </ul>
+
+                <form class="d-flex me-2" id="aramaFormu">
+                    <input id="tarifAramaInput" class="form-control me-2" type="search" placeholder="Tarif ara...">
+                    <button class="btn btn-outline-dark" type="submit">Ara</button>
+                </form>
+
+                <div id="auth-alan">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#authModal">
+                        Giriş / Kayıt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row g-4">
+
+            <div class="col-md-4 col-lg-3">
+                <div class="card border-0 shadow-sm rounded-4 text-center p-4">
+                    <div class="position-relative d-inline-block mx-auto mb-3">
+                        <img id="profilAvatar"
+                            src="https://ui-avatars.com/api/?name=Nevzat+Guzel&background=C0392B&color=fff&size=128"
+                            class="rounded-circle shadow-sm border border-4 border-white" alt="Profil">
+                        <span
+                            class="position-absolute bottom-0 end-0 bg-success border border-2 border-white rounded-circle p-2"
+                            title="Çevrimiçi"></span>
+                    </div>
+                    <h4 class="fw-bold mb-0" id="profilAdi">Nevzat Güzel</h4>
+                    <p class="text-muted small" id="profilUnvan">Bilgisayar Mühendisliği Öğrencisi</p>
+                    <hr>
+                    <div class="text-start mb-4">
+                        <p class="small mb-1 text-muted" id="profilKurumText"><i class="fas fa-university me-2"></i>
+                            <span>İnönü Üniversitesi</span>
+                        </p>
+                        <p class="small mb-1 text-muted" id="profilKonumText"><i class="fas fa-map-marker-alt me-2"></i>
+                            <span>Malatya, Türkiye</span>
+                        </p>
+                        <p class="small mb-0 text-muted">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            Katılım: <span id="katilimTarihiText">Mayıs 2026</span>
+                        </p>
+                    </div>
+
+                    <button class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-bold" data-bs-toggle="modal"
+                        data-bs-target="#profilDuzenleModal">
+                        <i class="fas fa-edit me-1"></i> Profili Düzenle
+                    </button>
+
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-4 mt-4 p-3">
+                    <h6 class="fw-bold border-bottom pb-2 mb-3">İstatistikler</h6>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="small text-muted">Paylaşılan Tarifler</span>
+                        <span class="fw-bold small" id="istatistikTarifSayisi">0</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="small text-muted">Favoriler</span>
+                        <span class="fw-bold small" id="istatistikFavoriSayisi">0</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <span class="small text-muted">Yorumlanan Tarifler</span>
+                        <span class="fw-bold small" id="istatistikYorumSayisi">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-lg-9">
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fw-bold mb-0">Tariflerim</h3>
+                        <button class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm"
+                            onclick="location.href='tarif-ekle.html'">
+                            <i class="fas fa-plus me-2"></i> Yeni Tarif Ekle
+                        </button>
+                    </div>
+
+                    <div class="row g-3" id="kullanici-tarif-karti-alani">
+                    </div>
+                </div>
+            </div>
+            <!-- FAVORİLERİM BÖLÜMÜ -->
+            <div class="card border-0 shadow-sm rounded-4 p-4 mt-4" id="favoriler-bolumu">
+                <h3 class="fw-bold mb-4">❤️ Favorilerim</h3>
+                <div class="row g-3" id="favori-karti-alani">
+                    <p class="text-muted text-center">Favoriler yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0 small text-secondary">© 2026 Ne Pişirsem? - Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+    <div class="modal fade" id="profilDuzenleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold">Profili Düzenle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body px-4 pb-4">
+                    <form id="profilDuzenleForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Ad Soyad</label>
+                            <input type="text" class="form-control" id="editAd" readonly disabled bg-light>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Ünvan</label>
+                            <input type="text" class="form-control" id="editUnvan" placeholder="Örn: Öğrenci, Şef...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Üniversite / Kurum</label>
+                            <input type="text" class="form-control" id="editKurum"
+                                placeholder="Örn: İnönü Üniversitesi">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Konum</label>
+                            <input type="text" class="form-control" id="editKonum" placeholder="Örn: Malatya, Türkiye">
+                        </div>
+                        <button type="submit" class="btn btn-danger w-100 rounded-pill fw-bold mt-2">Değişiklikleri
+                            Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        async function istatistikleriGuncelle() {
+            const isim = localStorage.getItem('aktifKullanici');
+            if (!isim) return;
+
+            try {
+                const cevap = await fetch('http://localhost:3000/api/tarifler');
+                const tumTarifler = await cevap.json();
+                const kullaniciTarifleri = tumTarifler.filter(t =>
+                    t.author && t.author.trim().toLowerCase() === isim.trim().toLowerCase()
+                );
+                const tarifSayiAlani = document.getElementById('istatistikTarifSayisi');
+                if (tarifSayiAlani) tarifSayiAlani.innerText = kullaniciTarifleri.length;
+
+                const yorumCevap = await fetch('http://localhost:3000/api/all-comments');
+                if (!yorumCevap.ok) throw new Error("Yorumlar çekilemedi");
+                const tumYorumlar = await yorumCevap.json();
+                const kullaniciYorumlari = tumYorumlar.filter(y =>
+                    y.author_name && y.author_name.trim().toLowerCase() === isim.trim().toLowerCase()
+                );
+                const yorumSayiAlani = document.getElementById('istatistikYorumSayisi');
+                if (yorumSayiAlani) yorumSayiAlani.innerText = kullaniciYorumlari.length;
+                const kullanici = localStorage.getItem('aktifKullanici') || 'misafir';
+                const favoriler = JSON.parse(localStorage.getItem('favoriler_' + kullanici) || '[]');
+
+                if (document.getElementById('istatistikFavoriSayisi')) {
+                    document.getElementById('istatistikFavoriSayisi').innerText = favoriler.length;
+                }
+            } catch (err) {
+                console.error("İstatistik yükleme hatası:", err);
+            }
+        }
+        window.istatistikleriGuncelle = istatistikleriGuncelle;
+
+        async function favorileriYukle() {
+            const alan = document.getElementById('favori-karti-alani');
+            if (!alan) return;
+
+            const kullanici = localStorage.getItem('aktifKullanici') || 'misafir';
+            const favoriler = JSON.parse(localStorage.getItem('favoriler_' + kullanici) || '[]');
+            if (favoriler.length === 0) {
+                alan.innerHTML = '<p class="text-muted text-center w-100">Henüz favori tarif eklemediniz.</p>';
+                return;
+            }
+
+            try {
+                const cevap = await fetch('http://localhost:3000/api/tarifler');
+                const tumTarifler = await cevap.json();
+                const favoriTarifler = tumTarifler.filter(t => favoriler.includes(String(t.id)));
+
+                if (favoriTarifler.length === 0) {
+                    alan.innerHTML = '<p class="text-muted text-center w-100">Favori tarifler bulunamadı.</p>';
+                    return;
+                }
+
+                alan.innerHTML = favoriTarifler.map(tarif => `
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden"
+                         onclick="location.href='tarif-detay.html?id=${tarif.id}'"
+                         style="cursor:pointer;">
+                        <img src="${tarif.image_url || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300'}"
+                             class="card-img-top" style="height:160px; object-fit:cover;">
+                        <div class="card-body p-3">
+                            <h6 class="fw-bold mb-1 text-truncate">${tarif.title}</h6>
+                            <div class="text-muted small"><i class="fas fa-tag me-1"></i>${tarif.category}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            } catch (err) {
+                console.error('Favoriler yüklenemedi:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const isim = localStorage.getItem('aktifKullanici');
+            const rol = localStorage.getItem('userRole');
+
+            const kayitliUnvan = localStorage.getItem('profilUnvan') || "Bilgisayar Mühendisliği Öğrencisi";
+            const kayitliKurum = localStorage.getItem('profilKurum') || "İnönü Üniversitesi";
+            const kayitliKonum = localStorage.getItem('profilKonum') || "Malatya, Türkiye";
+
+            let katilimTarihi = localStorage.getItem('profilKatilimTarihi');
+            if (!katilimTarihi) {
+                const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+                const simdi = new Date();
+                katilimTarihi = `${aylar[simdi.getMonth()]} ${simdi.getFullYear()}`;
+                localStorage.setItem('profilKatilimTarihi', katilimTarihi);
+            }
+
+            const profilIsimAlani = document.getElementById('profilAdi');
+            const profilUnvanAlani = document.getElementById('profilUnvan');
+            const profilAvatar = document.getElementById('profilAvatar');
+            const profilKurumSpan = document.querySelector('#profilKurumText span');
+            const profilKonumSpan = document.querySelector('#profilKonumText span');
+            const katilimAlani = document.getElementById('katilimTarihiText');
+
+            if (isim && profilIsimAlani) {
+                profilIsimAlani.innerText = isim;
+                if (profilAvatar) profilAvatar.src = `https://ui-avatars.com/api/?name=${isim}&background=C0392B&color=fff&size=128`;
+            }
+
+            if (profilUnvanAlani) profilUnvanAlani.innerText = kayitliUnvan;
+            if (profilKurumSpan) profilKurumSpan.innerText = kayitliKurum;
+            if (profilKonumSpan) profilKonumSpan.innerText = kayitliKonum;
+            if (katilimAlani) katilimAlani.innerText = katilimTarihi;
+
+            if (rol === 'admin' && profilUnvanAlani) {
+                profilUnvanAlani.innerText = "Sistem Yöneticisi / Kurucu";
+                profilUnvanAlani.classList.add('text-danger', 'fw-bold');
+            }
+
+            istatistikleriGuncelle();
+            favorileriYukle();
+
+            const duzenleModal = document.getElementById('profilDuzenleModal');
+            if (duzenleModal) {
+                duzenleModal.addEventListener('show.bs.modal', () => {
+                    document.getElementById('editAd').value = profilIsimAlani.innerText;
+                    document.getElementById('editUnvan').value = profilUnvanAlani.innerText;
+                    document.getElementById('editKurum').value = profilKurumSpan.innerText;
+                    document.getElementById('editKonum').value = profilKonumSpan.innerText;
+                });
+            }
+
+            const duzenleForm = document.getElementById('profilDuzenleForm');
+            if (duzenleForm) {
+                duzenleForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const yeniUnvan = document.getElementById('editUnvan').value;
+                    const yeniKurum = document.getElementById('editKurum').value;
+                    const yeniKonum = document.getElementById('editKonum').value;
+
+                    profilUnvanAlani.innerText = yeniUnvan;
+                    profilKurumSpan.innerText = yeniKurum;
+                    profilKonumSpan.innerText = yeniKonum;
+
+                    localStorage.setItem('profilUnvan', yeniUnvan);
+                    localStorage.setItem('profilKurum', yeniKurum);
+                    localStorage.setItem('profilKonum', yeniKonum);
+
+                    const bootstrapModal = bootstrap.Modal.getInstance(duzenleModal);
+                    bootstrapModal.hide();
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

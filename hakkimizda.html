@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hakkımızda - Ne Pişirsem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <img src="logo.png" alt="Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm">
+                <span>Ne Pişirsem</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Anasayfa</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="katDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategoriler
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="katDropdown">
+                            <li><a class="dropdown-item" href="index.html?q=Ana Yemek">🍽️ Ana Yemekler</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Et Yemekleri">🥩 Et Yemekleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Çorba">🍲 Çorbalar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Tatlı">🍰 Tatlılar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Hamur İşleri">🥐 Hamur İşleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Atıştırmalık">🥪 Atıştırmalık</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="index.html">Tüm Tarifler</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="yazarlar.html">Yazarlar</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hakkimizda.html">Hakkımızda</a></li>
+                </ul>
+
+                <form class="d-flex me-2" id="aramaFormu">
+                    <input id="tarifAramaInput" class="form-control me-2" type="search" placeholder="Tarif ara...">
+                    <button class="btn btn-outline-dark" type="submit">Ara</button>
+                </form>
+
+                <div id="auth-alan">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#authModal">
+                        Giriş / Kayıt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-5 py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-5">
+                    <h2 class="fw-bold mb-4" style="color: #C0392B;">Biz Kimiz?</h2>
+                    <p class="lead text-muted">
+                        Ne Pişirsem, İnönü Üniversitesi Bilgisayar Mühendisliği öğrencileri tarafından hayata geçirilen
+                        bir vizyon projesidir.
+                    </p>
+                    <p>
+                        Amacımız, mutfakta vakit geçirmeyi seven ancak "Bugün ne pişirsem?" sorusuna yanıt bulmakta
+                        zorlanan herkes için dijital bir asistan oluşturmaktır. Elinizdeki malzemeleri sisteme girerek
+                        size en uygun tarifleri saniyeler içinde sunan algoritmamız, mutfak israfını önlemeyi ve yemek
+                        yapma sürecini keyifli hale getirmeyi hedefler.
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <h6 class="fw-bold"><i class="fas fa-check-circle text-success me-2"></i> Vizyonumuz</h6>
+                            <p class="small text-muted">Yemek yapmayı teknolojiyle birleştirerek evrensel bir mutfak
+                                rehberi oluşturmak.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="fw-bold"><i class="fas fa-check-circle text-success me-2"></i> Misyonumuz</h6>
+                            <p class="small text-muted">Kullanıcıların sahip oldukları kaynakları en verimli şekilde
+                                kullanmalarını sağlamak.</p>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <p class="small text-muted italic">Bu proje, İnternet Programcılığı dersi kapsamında geliştirilmekte
+                        olup
+                        sürekli güncellenmektedir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0 small text-secondary">© 2026 Ne Pişirsem? - Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli - Ne Pişirsem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <img src="logo.png" alt="Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm">
+                <span>Ne Pişirsem</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Anasayfa</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="katDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategoriler
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="katDropdown">
+                            <li><a class="dropdown-item" href="index.html?q=Ana Yemek">🍽️ Ana Yemekler</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Et Yemekleri">🥩 Et Yemekleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Çorba">🍲 Çorbalar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Tatlı">🍰 Tatlılar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Hamur İşleri">🥐 Hamur İşleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Atıştırmalık">🥪 Atıştırmalık</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="index.html">Tüm Tarifler</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="yazarlar.html">Yazarlar</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hakkimizda.html">Hakkımızda</a></li>
+                </ul>
+
+                <form class="d-flex me-2" id="aramaFormu">
+                    <input id="tarifAramaInput" class="form-control me-2" type="search" placeholder="Tarif ara...">
+                    <button class="btn btn-outline-dark" type="submit">Ara</button>
+                </form>
+
+                <div id="auth-alan">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#authModal">
+                        Giriş / Kayıt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row g-4">
+
+            <div class="col-md-3">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                    <div class="p-4 text-center border-bottom bg-white">
+                        <h6 class="fw-bold mb-0 text-uppercase small tracking-widest text-muted">Sistem Yönetimi</h6>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="menu-btn list-group-item list-group-item-action border-0 py-3"
+                            onclick="bolumGoster('slider-bolumu')">
+                            <i class="fas fa-images me-3"></i> Slider Yönetimi
+                        </a>
+                        <a href="#" class="menu-btn list-group-item list-group-item-action border-0 py-3"
+                            style="background-color: #C0392B; color: white;" onclick="bolumGoster('tarif-bolumu')">
+                            <i class="fas fa-utensils me-3"></i> Tarif Yönetimi
+                        </a>
+                        <a href="#" class="menu-btn list-group-item list-group-item-action border-0 py-3"
+                            onclick="bolumGoster('kullanici-bolumu')">
+                            <i class="fas fa-users me-3"></i> Kullanıcılar
+                        </a>
+                        <a href="#" class="menu-btn list-group-item list-group-item-action border-0 py-3"
+                            onclick="bolumGoster('yorum-bolumu')">
+                            <i class="fas fa-comments me-3"></i> Yorumlar
+                            <span class="badge rounded-pill bg-danger float-end" id="yorum-sayac"></span>
+                        </a>
+                        <a href="#" class="menu-btn list-group-item list-group-item-action border-0 py-3"
+                            onclick="bolumGoster('istatistik-bolumu')">
+                            <i class="fas fa-chart-line me-3"></i> İstatistikler
+                        </a>
+                        <a href="#" class="menu-btn list-group-item list-group-item-action border-0 py-3"
+                            onclick="bolumGoster('ayarlar-bolumu')">
+                            <i class="fas fa-cog me-3"></i> Sistem Ayarları
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-4 mt-4 p-4 bg-dark text-white">
+                    <div class="small opacity-75">Toplam Yorum</div>
+                    <h2 class="fw-bold mb-0" id="bekleyen-sayi">—</h2>
+                    <div class="mt-2 text-warning small">
+                        <i class="fas fa-exclamation-circle me-1"></i> İncelenmesi gerekiyor
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div id="tarif-bolumu" class="card border-0 shadow-sm rounded-4 p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h3 class="fw-bold mb-1">Tarif Yönetimi</h3>
+                            <p class="text-muted small mb-0">Sistemdeki tüm tarifleri buradan yönetebilirsiniz.</p>
+                        </div>
+                        <a href="tarif-ekle.html" class="btn btn-dark rounded-pill px-4 shadow-sm">
+                            <i class="fas fa-plus me-2"></i> Yeni Ekle
+                        </a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="border-0 rounded-start">Tarif</th>
+                                    <th class="border-0">Yazar</th>
+                                    <th class="border-0">Tarih</th>
+                                    <th class="border-0">Durum</th>
+                                    <th class="border-0 text-end rounded-end">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-tarif-tablosu">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <nav class="mt-4">
+                        <ul class="pagination pagination-sm justify-content-center">
+                            <li class="page-item disabled"><a class="page-link border-0 shadow-sm  mx-1 rounded"
+                                    href="#">Önceki</a></li>
+                            <li class="page-item active"><a class="page-link border-0 shadow-sm mx-1 rounded"
+                                    style="background-color: #C0392B;" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link border-0 shadow-sm mx-1 rounded text-dark"
+                                    href="#">2</a></li>
+                            <li class="page-item"><a class="page-link border-0 shadow-sm mx-1 rounded text-dark"
+                                    href="#">Sonraki</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="kullanici-bolumu" class="card border-0 shadow-sm rounded-4 p-4 mt-4" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h3 class="fw-bold mb-1">Kullanıcı Yönetimi</h3>
+                            <p class="text-muted small mb-0">Sistemdeki tüm kayıtlı kullanıcıları buradan
+                                görebilirsiniz.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="border-0 rounded-start">ID</th>
+                                    <th class="border-0">Kullanıcı Adı</th>
+                                    <th class="border-0">E-Posta</th>
+                                    <th class="border-0">Rol</th>
+                                    <th class="border-0">Kayıt Tarihi</th>
+                                    <th class="border-0 rounded-end">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-kullanici-tablosu">
+                                <!-- Kullanıcılar JS ile buraya dolacak -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- YORUM YÖNETİMİ BÖLÜMÜ -->
+                <div id="yorum-bolumu" class="card border-0 shadow-sm rounded-4 p-4 mt-4" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h3 class="fw-bold mb-1">Yorum Yönetimi</h3>
+                            <p class="text-muted small mb-0">Tüm tariflere yapılan yorumları buradan yönetebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="border-0">ID</th>
+                                    <th class="border-0">Tarif</th>
+                                    <th class="border-0">Yazan</th>
+                                    <th class="border-0">Yorum</th>
+                                    <th class="border-0">Tarih</th>
+                                    <th class="border-0">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-yorum-tablosu">
+                                <!-- JS ile dolacak -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- SİSTEM AYARLARI BÖLÜMÜ -->
+                <div id="ayarlar-bolumu" class="mt-4" style="display: none;">
+
+                    <!-- Site Bilgileri (Görsel) -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <h5 class="fw-bold mb-4">⚙️ Site Ayarları</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Site Adı</label>
+                                <input type="text" class="form-control bg-light border-0" value="Ne Pişirsem">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Site Sloganı</label>
+                                <input type="text" class="form-control bg-light border-0" value="Lezzetin Adresi">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Site
+                                    Açıklaması</label>
+                                <textarea class="form-control bg-light border-0"
+                                    rows="2">Türkiye'nin en kapsamlı tarif platformu.</textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Bakım Modu</label>
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" id="bakimModu"
+                                        style="width:50px; height:25px; cursor:pointer;">
+                                    <label class="form-check-label ms-2 fw-bold" for="bakimModu"
+                                        id="bakimModuLabel">Kapalı</label>
+                                </div>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button class="btn btn-dark rounded-pill px-4" onclick="alert('Ayarlar kaydedildi! ✅')">
+                                    <i class="fas fa-save me-2"></i>Kaydet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Şifre Değiştir (Gerçek) -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <h5 class="fw-bold mb-4">🔑 Admin Şifre Değiştir</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Mevcut Şifre</label>
+                                <input type="password" id="eskiSifre" class="form-control bg-light border-0"
+                                    placeholder="Mevcut şifreniz">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Yeni Şifre</label>
+                                <input type="password" id="yeniSifre" class="form-control bg-light border-0"
+                                    placeholder="Yeni şifre">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Yeni Şifre
+                                    (Tekrar)</label>
+                                <input type="password" id="yeniSifreTekrar" class="form-control bg-light border-0"
+                                    placeholder="Yeni şifre tekrar">
+                            </div>
+                            <div class="col-12 text-end">
+                                <button class="btn btn-dark rounded-pill px-4" onclick="sifreDegistir()">
+                                    <i class="fas fa-key me-2"></i>Şifreyi Güncelle
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tehlikeli Bölüm (Gerçek) -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 border border-danger">
+                        <h5 class="fw-bold mb-1 text-danger">⚠️ Tehlikeli Bölüm</h5>
+                        <p class="text-muted small mb-4">Bu işlemler geri alınamaz. Dikkatli olun.</p>
+                        <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded-3">
+                            <div>
+                                <div class="fw-bold">Tüm Yorumları Temizle</div>
+                                <div class="text-muted small">Sistemdeki tüm yorumlar kalıcı olarak silinir.</div>
+                            </div>
+                            <button class="btn btn-outline-danger rounded-pill px-4" onclick="tumYorumlariTemizle()">
+                                <i class="fas fa-trash me-2"></i>Temizle
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- SLIDER YÖNETİMİ -->
+                <div id="slider-bolumu" class="mt-4" style="display: none;">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h3 class="fw-bold mb-1">Slider Yönetimi</h3>
+                        <p class="text-muted small mb-4">Ana sayfadaki 3 slider kartını buradan güncelleyebilirsiniz.
+                        </p>
+                        <div id="slider-yonetim-alani">
+                            <p class="text-muted text-center">Yükleniyor...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- İSTATİSTİK BÖLÜMÜ -->
+                <div id="istatistik-bolumu" class="mt-4" style="display: none;">
+
+                    <!-- 4 KART -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                                <div class="mb-2" style="font-size:2rem;">🍽️</div>
+                                <h2 class="fw-bold mb-0" id="stat-tarif">—</h2>
+                                <div class="text-muted small mt-1">Toplam Tarif</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                                <div class="mb-2" style="font-size:2rem;">👤</div>
+                                <h2 class="fw-bold mb-0" id="stat-kullanici">—</h2>
+                                <div class="text-muted small mt-1">Toplam Kullanıcı</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                                <div class="mb-2" style="font-size:2rem;">💬</div>
+                                <h2 class="fw-bold mb-0" id="stat-yorum">—</h2>
+                                <div class="text-muted small mt-1">Toplam Yorum</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
+                                <div class="mb-2" style="font-size:2rem;">🏷️</div>
+                                <h2 class="fw-bold mb-0" id="stat-kategori">—</h2>
+                                <div class="text-muted small mt-1">Toplam Kategori</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SON KAYIT OLAN KULLANICILAR -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <h5 class="fw-bold mb-3">👥 Son Kayıt Olan Kullanıcılar</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="border-0">Kullanıcı</th>
+                                        <th class="border-0">E-Posta</th>
+                                        <th class="border-0">Rol</th>
+                                        <th class="border-0">Kayıt Tarihi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stat-son-kullanicilar"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- EN ÇOK YORUM ALAN TARİFLER -->
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h5 class="fw-bold mb-3">🔥 En Çok Yorum Alan Tarifler</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="border-0">Tarif</th>
+                                        <th class="border-0">Yorum Sayısı</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stat-populer-tarifler"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="duzenleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 bg-dark text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-edit me-2"></i>Tarifi Düzenle</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <input type="hidden" id="duzenleId">
+
+                    <div class="mb-3">
+                        <label for="duzenleBaslik" class="form-label small fw-bold text-uppercase text-muted">Tarif
+                            Başlığı</label>
+                        <input type="text" id="duzenleBaslik"
+                            class="form-control rounded-3 border-0 bg-light shadow-sm py-2">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="duzenleYazar"
+                            class="form-label small fw-bold text-uppercase text-muted">Yazar</label>
+                        <input type="text" id="duzenleYazar"
+                            class="form-control rounded-3 border-0 bg-light shadow-sm py-2">
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-toggle="modal">İptal</button>
+                    <button type="button" class="btn btn-dark rounded-pill px-4"
+                        onclick="tarifGuncelleKaydet()">Değişiklikleri Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0 small text-secondary">© 2026 Ne Pişirsem? - Admin Yönetim Modülü</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // =============================================
+        // KULLANICILARI YÜKLEYİP TABLOYA DOLDURMA
+        // =============================================
+        async function kullanicilariYukle() {
+            try {
+                const cevap = await fetch('http://localhost:3000/api/kullanicilar');
+
+                if (!cevap.ok) throw new Error('Sunucu hatası: ' + cevap.status);
+
+                const kullanicilar = await cevap.json();
+                const tbody = document.getElementById('admin-kullanici-tablosu');
+
+                if (!tbody) return;
+
+                if (kullanicilar.length === 0) {
+                    tbody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">Henüz kayıtlı kullanıcı yok.</td>
+                </tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = kullanicilar.map(k => {
+                    const tarih = k.created_at
+                        ? new Date(k.created_at).toLocaleDateString('tr-TR')
+                        : '-';
+                    const rolRenk = k.role === 'admin' ? 'danger' : 'secondary';
+                    return `
+                <tr id="kullanici-satir-${k.id}">
+                    <td>${k.id}</td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(k.username)}&background=random&size=32" 
+                                 class="rounded-circle" width="32" height="32">
+                            <span class="fw-semibold">${k.username}</span>
+                        </div>
+                    </td>
+                    <td>${k.email}</td>
+                    <td><span class="badge bg-${rolRenk} rounded-pill">${k.role || 'user'}</span></td>
+                    <td>${tarih}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger rounded-3"
+                            onclick="kullaniciSil(${k.id}, '${k.username}')">
+                            <i class="fas fa-trash-alt me-1"></i> Sil
+                        </button>
+                    </td>
+                </tr>`;
+                }).join('');
+
+            } catch (hata) {
+                console.error('Kullanıcılar yüklenemedi:', hata);
+                const tbody = document.getElementById('admin-kullanici-tablosu');
+                if (tbody) {
+                    tbody.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center text-danger py-4">
+                        <i class="fas fa-exclamation-circle me-2"></i>Kullanıcılar yüklenemedi.
+                    </td>
+                </tr>`;
+                }
+            }
+        }
+
+        // =============================================
+        // BÖLÜM DEĞİŞİNCE OTOMATİK YÜKLEMEYİ TETIKLE
+        // =============================================
+        // Orijinal bolumGoster fonksiyonunu sarmalıyoruz
+        function bolumGoster(bolumId) {
+            // Tüm bölümleri gizle
+            document.querySelectorAll('[id$="-bolumu"]').forEach(b => b.style.display = 'none');
+
+            // Seçilen bölümü göster
+            const hedef = document.getElementById(bolumId);
+            if (hedef) hedef.style.display = 'block';
+
+            // Tüm menü butonlarının rengini sıfırla
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            });
+
+            // Tıklanan butonu kırmızı yap
+            const aktifBtn = document.querySelector(`.menu-btn[onclick="bolumGoster('${bolumId}')"]`);
+            if (aktifBtn) {
+                aktifBtn.style.backgroundColor = '#C0392B';
+                aktifBtn.style.color = 'white';
+            }
+
+            // Kullanıcılar sekmesine geçince yükle
+            if (bolumId === 'kullanici-bolumu') {
+                kullanicilariYukle();
+            }
+            if (bolumId === 'yorum-bolumu') {
+                yorumlariYukle();
+            }
+            if (bolumId === 'istatistik-bolumu') {
+                istatistikleriYukle();
+            }
+            if (bolumId === 'slider-bolumu') {
+                adminSliderYukle();
+            }
+        }
+
+
+        // Sayfa açıldığında kullanıcı bölümü zaten aktifse direkt yükle
+        async function yorumlariYukle() {
+            try {
+                const cevap = await fetch('http://localhost:3000/api/admin/yorumlar');
+                if (!cevap.ok) throw new Error('Sunucu hatası');
+
+                const yorumlar = await cevap.json();
+                const tbody = document.getElementById('admin-yorum-tablosu');
+                if (!tbody) return;
+
+                const sayac = document.getElementById('yorum-sayac');
+                if (sayac) sayac.innerText = yorumlar.length;
+
+                if (yorumlar.length === 0) {
+                    tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">Henüz yorum yok.</td>
+                </tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = yorumlar.map(y => {
+                    const tarih = y.created_at
+                        ? new Date(y.created_at).toLocaleDateString('tr-TR')
+                        : '-';
+                    return `
+                <tr id="yorum-satir-${y.id}">
+                    <td>${y.id}</td>
+                    <td><span class="badge bg-light text-dark border">${y.tarif_adi || 'Silinmiş Tarif'}</span></td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(y.author_name)}&background=random&size=28"
+                                 class="rounded-circle" width="28" height="28">
+                            <span class="fw-semibold small">${y.author_name}</span>
+                        </div>
+                    </td>
+                    <td class="text-muted small" style="max-width:300px;">${y.comment_text}</td>
+                    <td class="small">${tarih}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger rounded-3" onclick="yorumSil(${y.id})">
+                            <i class="fas fa-trash-alt me-1"></i> Sil
+                        </button>
+                    </td>
+                </tr>`;
+                }).join('');
+
+            } catch (hata) {
+                console.error('Yorumlar yüklenemedi:', hata);
+            }
+        }
+        async function istatistikleriYukle() {
+            try {
+                // 3 endpoint'i aynı anda çek
+                const [tarifCevap, kullaniciCevap, yorumCevap] = await Promise.all([
+                    fetch('http://localhost:3000/api/tarifler'),
+                    fetch('http://localhost:3000/api/kullanicilar'),
+                    fetch('http://localhost:3000/api/admin/yorumlar')
+                ]);
+
+                const tarifler = await tarifCevap.json();
+                const kullanicilar = await kullaniciCevap.json();
+                const yorumlar = await yorumCevap.json();
+
+                // KARTLARI DOLDUR
+                document.getElementById('stat-tarif').innerText = tarifler.length;
+                document.getElementById('stat-kullanici').innerText = kullanicilar.length;
+                document.getElementById('stat-yorum').innerText = yorumlar.length;
+
+                // Benzersiz kategori sayısı
+                const kategoriler = [...new Set(tarifler.map(t => t.category).filter(Boolean))];
+                document.getElementById('stat-kategori').innerText = kategoriler.length;
+
+                // SON 5 KULLANICI
+                const sonKullanicilar = [...kullanicilar].reverse().slice(0, 5);
+                document.getElementById('stat-son-kullanicilar').innerHTML = sonKullanicilar.map(k => {
+                    const tarih = k.created_at ? new Date(k.created_at).toLocaleDateString('tr-TR') : '-';
+                    const rolRenk = k.role === 'admin' ? 'danger' : 'secondary';
+                    return `
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(k.username)}&background=random&size=30"
+                                 class="rounded-circle" width="30" height="30">
+                            <span class="fw-semibold small">${k.username}</span>
+                        </div>
+                    </td>
+                    <td class="small text-muted">${k.email}</td>
+                    <td><span class="badge bg-${rolRenk} rounded-pill">${k.role || 'user'}</span></td>
+                    <td class="small">${tarih}</td>
+                </tr>`;
+                }).join('');
+
+                // EN ÇOK YORUM ALAN 5 TARİF
+                const yorumSayilari = {};
+                yorumlar.forEach(y => {
+                    const ad = y.tarif_adi || 'Silinmiş Tarif';
+                    yorumSayilari[ad] = (yorumSayilari[ad] || 0) + 1;
+                });
+
+                const sirali = Object.entries(yorumSayilari)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5);
+
+                document.getElementById('stat-populer-tarifler').innerHTML = sirali.map(([ad, sayi], i) => `
+            <tr>
+                <td>
+                    <span class="me-2 fw-bold text-muted">${i + 1}.</span>
+                    <span class="badge bg-light text-dark border">${ad}</span>
+                </td>
+                <td>
+                    <span class="badge rounded-pill" style="background-color:#C0392B; color:white;">
+                        ${sayi} yorum
+                    </span>
+                </td>
+            </tr>`).join('');
+
+            } catch (hata) {
+                console.error('İstatistikler yüklenemedi:', hata);
+            }
+        }
+        async function yorumSil(id) {
+            if (!confirm('Bu yorumu silmek istediğine emin misin?')) return;
+
+            try {
+                const cevap = await fetch(`http://localhost:3000/api/admin/yorumlar/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (cevap.ok) {
+                    document.getElementById(`yorum-satir-${id}`).remove();
+                    const sayac = document.getElementById('yorum-sayac');
+                    if (sayac) sayac.innerText = parseInt(sayac.innerText) - 1;
+                } else {
+                    alert('Yorum silinemedi!');
+                }
+            } catch (hata) {
+                console.error('Silme hatası:', hata);
+                alert('Bir hata oluştu!');
+            }
+        }
+        async function kullaniciSil(id, isim) {
+            if (!confirm(`"${isim}" kullanıcısını silmek istediğine emin misin?`)) return;
+
+            try {
+                const cevap = await fetch(`http://localhost:3000/api/kullanicilar/${id}`, {
+                    method: 'DELETE'
+                });
+                const sonuc = await cevap.json();
+                if (sonuc.success) {
+                    document.getElementById(`kullanici-satir-${id}`)?.remove();
+                    alert('Kullanıcı silindi!');
+                } else {
+                    alert('Silinemedi: ' + sonuc.message);
+                }
+            } catch (err) {
+                alert('Sunucu hatası!');
+            }
+        }
+        async function adminSliderYukle() {
+            const alan = document.getElementById('slider-yonetim-alani');
+            if (!alan) return;
+
+            try {
+                const [sliderCevap, tarifCevap] = await Promise.all([
+                    fetch('http://localhost:3000/api/slider'),
+                    fetch('http://localhost:3000/api/tarifler')
+                ]);
+
+                const sliderlar = await sliderCevap.json();
+                const tarifler = await tarifCevap.json();
+
+                const tarifOptions = tarifler.map(t =>
+                    `<option value="${t.id}">${t.title}</option>`
+                ).join('');
+
+                const slotIsimleri = { 1: '🖼️ Büyük Kart (Günün Tarifi)', 2: '📌 Küçük Kart 1', 3: '📌 Küçük Kart 2' };
+
+                alan.innerHTML = sliderlar.map(s => `
+            <div class="card border-0 bg-light rounded-3 p-3 mb-3">
+                <div class="fw-bold mb-2">${slotIsimleri[s.slot] || 'Slot ' + s.slot}</div>
+                <div class="d-flex align-items-center gap-3">
+                    ${s.image_url ? `<img src="${s.image_url}" width="80" height="60" class="rounded-2 object-fit-cover">` : ''}
+                    <div class="flex-grow-1">
+                        <div class="text-muted small mb-2">Şu an: <b>${s.title || 'Seçilmemiş'}</b></div>
+                        <select class="form-select form-select-sm border-0 bg-white" id="slider-secim-${s.slot}">
+                            ${tarifler.map(t => `
+                                <option value="${t.id}" ${t.id === s.recipe_id ? 'selected' : ''}>${t.title}</option>
+                            `).join('')}
+                        </select>
+                    </div>
+                    <button class="btn btn-dark btn-sm rounded-pill px-3"
+                        onclick="sliderGuncelle(${s.slot})">
+                        <i class="fas fa-save me-1"></i> Kaydet
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+            } catch (err) {
+                console.error('Slider yüklenemedi:', err);
+            }
+        }
+
+        async function sliderGuncelle(slot) {
+            const secim = document.getElementById(`slider-secim-${slot}`);
+            if (!secim) return;
+
+            const recipe_id = parseInt(secim.value);
+
+            try {
+                const cevap = await fetch(`http://localhost:3000/api/slider/${slot}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ recipe_id })
+                });
+                const sonuc = await cevap.json();
+                if (sonuc.success) {
+                    alert('Slider güncellendi! ✅');
+                    adminSliderYukle();
+                }
+            } catch (err) {
+                console.error('Slider güncellenemedi:', err);
+                alert('Hata oluştu!');
+            }
+        }
+        async function sifreDegistir() {
+            const eski = document.getElementById('eskiSifre').value.trim();
+            const yeni = document.getElementById('yeniSifre').value.trim();
+            const tekrar = document.getElementById('yeniSifreTekrar').value.trim();
+
+            if (!eski || !yeni || !tekrar) {
+                alert('Lütfen tüm alanları doldurun!'); return;
+            }
+            if (yeni !== tekrar) {
+                alert('Yeni şifreler eşleşmiyor!'); return;
+            }
+            if (yeni.length < 4) {
+                alert('Şifre en az 4 karakter olmalı!'); return;
+            }
+
+            try {
+                const cevap = await fetch('http://localhost:3000/api/admin/sifre-degistir', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ eskiSifre: eski, yeniSifre: yeni })
+                });
+                const sonuc = await cevap.json();
+                alert(sonuc.message);
+                if (sonuc.success) {
+                    document.getElementById('eskiSifre').value = '';
+                    document.getElementById('yeniSifre').value = '';
+                    document.getElementById('yeniSifreTekrar').value = '';
+                }
+            } catch (hata) {
+                alert('Sunucu hatası!');
+            }
+        }
+
+        async function tumYorumlariTemizle() {
+            if (!confirm('TÜM yorumlar silinecek! Bu işlem geri alınamaz. Emin misin?')) return;
+            if (!confirm('Son kez soruyorum, tüm yorumlar kalıcı silinsin mi?')) return;
+
+            try {
+                const cevap = await fetch('http://localhost:3000/api/admin/tum-yorumlar', {
+                    method: 'DELETE'
+                });
+                const sonuc = await cevap.json();
+                alert(sonuc.message);
+                if (sonuc.success) {
+                    const sayac = document.getElementById('yorum-sayac');
+                    if (sayac) sayac.innerText = '0';
+                }
+            } catch (hata) {
+                alert('Sunucu hatası!');
+            }
+        }
+
+        // Bakım modu toggle etiketi
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('bakimModu');
+            const label = document.getElementById('bakimModuLabel');
+            if (toggle && label) {
+                toggle.addEventListener('change', () => {
+                    label.innerText = toggle.checked ? 'Açık 🔴' : 'Kapalı';
+                });
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const kullaniciBolumu = document.getElementById('kullanici-bolumu');
+            if (kullaniciBolumu && kullaniciBolumu.style.display !== 'none') {
+                kullanicilariYukle();
+            }
+        });
+    </script>
+</body>
+
+</html>

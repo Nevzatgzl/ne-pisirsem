@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarif Detay - Ne Pişirsem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <img src="logo.png" alt="Logo" width="50" height="50" class="me-2 rounded-circle shadow-sm">
+                <span>Ne Pişirsem</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Anasayfa</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="katDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategoriler
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="katDropdown">
+                            <li><a class="dropdown-item" href="index.html?q=Ana Yemek">🍽️ Ana Yemekler</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Et Yemekleri">🥩 Et Yemekleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Çorba">🍲 Çorbalar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Tatlı">🍰 Tatlılar</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Hamur İşleri">🥐 Hamur İşleri</a></li>
+                            <li><a class="dropdown-item" href="index.html?q=Atıştırmalık">🥪 Atıştırmalık</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="index.html">Tüm Tarifler</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="yazarlar.html">Yazarlar</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hakkimizda.html">Hakkımızda</a></li>
+                </ul>
+
+                <form class="d-flex me-2" id="aramaFormu">
+                    <input id="tarifAramaInput" class="form-control me-2" type="search" placeholder="Tarif ara...">
+                    <button class="btn btn-outline-dark" type="submit">Ara</button>
+                </form>
+
+                <div id="auth-alan">
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#authModal">
+                        Giriş / Kayıt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="shadow-sm p-4 bg-white rounded-4 text-center mb-5 border">
+            <h1 id="tarifBaslik" class="fw-bold display-5 mb-2">Tam Ölçülü Sufle</h1>
+            <div class="text-muted">
+                <span class="me-3"><i class="fas fa-user-circle me-1"></i> Yazar: <b id="yazarAdi">Fatıma</b></span>
+                <span><i class="fas fa-star text-warning me-1"></i> <span id="tarifPuan">—</span>/5 (<span
+                        id="tarifYorumSayisi">0</span> Yorum)</span>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-5">
+                <div class="rounded-4 overflow-hidden shadow-sm mb-4 border">
+                    <img id="tarifResmi" src="https://images.unsplash.com/photo-1599474151636-22b8272a8cb6?w=800"
+                        class="img-fluid w-100" alt="Yemek">
+                </div>
+                <div class="p-4 rounded-4 shadow-sm border bg-white">
+                    <div class="row text-center g-3">
+                        <div class="col-6 border-end">Hazırlama<br><b id="hazirlamaSuresi">15 DK</b></div>
+                        <div class="col-6">Pişirme<br><b id="pisirmeSuresi">10 DK</b></div>
+                        <div class="col-6 border-end border-top pt-2">Kaç Kişilik<br><b id="kisiSayisi">4 Kişilik</b>
+                        </div>
+                        <div class="col-6 border-top pt-2">Zorluk<br><b id="zorlukDerecesi">Orta</b></div>
+                    </div>
+                    <button id="favoriBtn" class="btn btn-danger w-100 mt-4 fw-bold shadow-sm rounded-pill"
+                        onclick="favoriToggle()">
+                        <i class="fas fa-heart me-2"></i> Tarifi Favorilerime Ekle
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                    <h4 class="fw-bold border-bottom pb-3 mb-3"><i
+                            class="fas fa-shopping-basket me-2 text-danger"></i>Malzemeler</h4>
+                    <ul id="malzemeListesi" class="list-group list-group-flush mb-4">
+                        <li class="list-group-item bg-transparent border-0"><i
+                                class="far fa-circle me-2 text-muted small"></i>125g Bitter Çikolata</li>
+                        <li class="list-group-item bg-transparent border-0"><i
+                                class="far fa-circle me-2 text-muted small"></i>3 Adet Yumurta</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-4 shadow-sm border">
+                    <h4 class="fw-bold border-bottom pb-3 mb-3"><i class="fas fa-utensils me-2 text-danger"></i>Nasıl
+                        Yapılır?</h4>
+                    <p id="hazirlanisAdimlari" class="lh-lg text-secondary">
+                        Fırını 220 dereceye ayarlayıp ısıtmaya başlayın. Sufle kaplarını tereyağı ile yağlayıp içlerine
+                        hafifçe kakao serpin...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-10">
+                <h4 class="fw-bold mb-4 text-center">Eğitici Tarif Videosu</h4>
+                <div class="shadow-lg rounded-4 overflow-hidden border border-4 border-white">
+                    <div class="ratio ratio-16x9" id="videoAlani">
+                        <iframe src="" id="tarifVideo" title="Tarif Videosu" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="bg-white p-4 rounded-4 shadow-sm border">
+                    <h5 class="fw-bold mb-4 text-center">Yorumlar (<span id="yorumSayisi">0</span>)</h5>
+
+                    <form id="yorumFormu">
+                        <div class="mb-3">
+                            <select id="puanSecimi" class="form-select border-0 bg-light">
+                                <option value="5">⭐⭐⭐⭐⭐ Harika</option>
+                                <option value="4">⭐⭐⭐⭐ Çok İyi</option>
+                                <option value="3">⭐⭐⭐ Orta</option>
+                                <option value="1">⭐ Kötü</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" id="yorumYapan" class="form-control border-0 bg-light"
+                                placeholder="Adınız Soyadınız" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea id="yorumMetni" class="form-control border-0 bg-light" rows="3"
+                                placeholder="Yorumunuz..." required></textarea>
+                        </div>
+                        <button type="button" onclick="yorumKaydet()"
+                            class="btn btn-dark w-100 rounded-pill fw-bold">Gönder</button>
+                    </form>
+
+                    <div id="yorumListesi" class="mt-5 border-top pt-4">
+                        <p class="text-muted text-center small">Yorumlar yükleniyor...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0 small text-secondary">© 2026 Ne Pişirsem? - Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <script src="detay.js"></script>
+</body>
+
+</html>
